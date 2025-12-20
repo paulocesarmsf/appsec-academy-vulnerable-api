@@ -1,11 +1,14 @@
-name: Security Analysis
+name: Static Security Pipeline
 
 on:
-  push:
-    branches: [ main, develop ]
   pull_request:
-    branches: [ main, develop ]
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  security-events: write
 
 jobs:
-  security-scan:
+  sast:
     uses: paulocesarmsf/appsec-academy/.github/workflows/static-security-pipeline.yml@main
