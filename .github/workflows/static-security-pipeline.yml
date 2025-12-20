@@ -1,0 +1,11 @@
+name: Security Analysis
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  security-scan:
+    uses: paulocesarmsf/appsec-academy/.github/workflows/static-security-pipeline.yml@main
