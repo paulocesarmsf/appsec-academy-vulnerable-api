@@ -4,6 +4,22 @@ import os
 
 app = Flask(__name__)
 
+@app.route('/list', methods=['GET'])
+def list_directory():
+    """
+    Endpoint vulnerable to command injection.
+    Receives a query param 'folder' with the folder name and lists its contents.
+    VULNERABLE: Does not sanitize user input before executing system commands.
+    """
+    folder = request.args.get('folder', '.')
+    
+    result = os.popen(f'ls -la {folder}').read()
+    
+    return jsonify({
+        'folder': folder,
+        'output': result
+    })
+
 @app.route('/', methods=['GET'])
 def index():
     return jsonify({
